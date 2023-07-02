@@ -1,0 +1,19 @@
+{
+  "name": "it-122",
+  "version": "1.0.0",
+  "description": "GitHub Repository : https://github.com/WysockiD34/IT_122",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WysockiD34/IT_122.git"
+  },
+  "author": "Drew Wysocki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WysockiD34/IT_122/issues"
+  },
+  "homepage": "https://github.com/WysockiD34/IT_122#readme"
+}
