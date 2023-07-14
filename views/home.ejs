@@ -1,0 +1,13 @@
+<html>
+  <body>
+    <h1>Games I enjoy playing</h1>
+    
+    <% games.forEach((game) => { %>
+      <li> <a href="/game/<%= game.title %> "> 
+            <%= game.title %> (<%= game.developer %>)
+      </a>
+      </li>
+    <% }); %>
+
+  </body>
+</html>
