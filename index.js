@@ -1,5 +1,5 @@
 import express from 'express';
-import {getAll, getItem} from './data.js';
+import { Game } from "./models/Games.js";
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
@@ -10,14 +10,19 @@ app.set('view engine', 'ejs');
 
 // send static file as response
 app.get('/', (req,res) => {
-    let games = getAll();
-    res.render('home', {games: games}); 
+  Game.find({}).lean()
+  .then((games) => {
+    res.render('home', { games });
+  }).catch(err => console.log(err)); 
   });
 
 // send content of 'home' view
 app.get('/games/:title', (req,res) => {
-    let result = getItem(req.params.title);
-        res.render('detail', { result })
+    Game.findOne({"title" : req.params.title}).lean()
+    .then((game) => {
+      //respond to browser only after db query completes
+      res.render('detail', { game });
+    });
     });
   
   // send plain text response
