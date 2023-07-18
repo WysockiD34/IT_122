@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
+import { connectionString } from "./credentials.js";
 
-// For security, connectionString should be in a separate file and excluded from git
-const connectionString = "mongodb+srv://<dbuser>:<dbpassword>@<cluster>.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(connectionString, {
     dbName: 'it-projects',
