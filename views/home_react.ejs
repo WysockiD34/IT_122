@@ -20,8 +20,7 @@
         const listGames = games.map((game) =>
             <li className =  "game" key = {game.title}>
             <a className = "the-game" href = {'/games/' + game.title}>
-                {`${game.title} (${game.release})`} 
-                </a>
+                {`${game.title} (${game.release})`} </a>
             </li>);
 
       return <div>
