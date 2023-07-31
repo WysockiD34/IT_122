@@ -45,7 +45,7 @@ app.post('/api/games/update/:title', (req, res) => {
 app.get('/', (req,res) => {
   Game.find({}).lean()
   .then((games) => {
-    res.render('home', { games });
+    res.render('home_react', { games: JSON.stringify(games) });
   }).catch(err => console.log(err)); 
   });
 

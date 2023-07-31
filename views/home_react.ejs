@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>List Of Games</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+
+<div id="root"></div>
+<script type="text/babel">
+
+    const games = <%- games %>;
+    // define other components
+    const App = () => {
+        const listGames = games.map((game) =>
+            <li className =  "game" key = {game.title}>
+            <a className = "the-game" href = {'/games/' + game.title}>
+                {`${game.title} (${game.release})`} 
+                </a>
+            </li>);
+
+      return <div>
+        <h2>Games I Enjoy Playing</h2>
+            <ul className= "games"> {listGames} </ul>
+        </div>;
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+</script>
+</body>
+</html>
