@@ -18,8 +18,8 @@
     // define other components
     const App = () => {
         const listGames = games.map((game) =>
-            <li className =  "game" key = {game.title}>
-            <a className = "the-game" href = {'/games/' + game.title}>
+            <li key = {game.title}>
+            <a href = {'/games/' + game.title}>
                 {`${game.title} (${game.release})`} </a>
             </li>);
 
