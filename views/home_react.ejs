@@ -1,5 +1,4 @@
 <html>
-<html>
 <head>
     <title>List Of Games</title>
 
@@ -15,20 +14,54 @@
 <div id="root"></div>
 <script type="text/babel">
 
-    const games = <%- games %>;
-    // define other components
-    const App = () => {
-        const listGames = games.map((game) =>
+const Games = (props) => {
+            const listGames = props.data.map((game) =>
             <li key = {game.title}>
-            <a href = {'/games/' + game.title}>
-                {`${game.title} (${game.developer})`} </a>
+            <a onClick={props.clickHandler}>
+                {`${game.title}`} </a>
             </li>);
+            
+            return <ul>{listGames}</ul>;
+        };
 
-      return <div>
-        <h2>Games I Enjoy Playing</h2>
-            <ul> {listGames} </ul>
-        </div>;
-    };
+    const Detail = (props) => {
+        return (
+                <div>
+                <h3>Game Details</h3>
+                {props.item &&
+                    <ul> 
+                        <li><b>Title</b>: {props.item.title}</li>
+                        <li><b>Developer</b>: {props.item.developer}</li>
+                        <li><b>Release</b>: {props.item.release}</li>
+                        <li><b>Genre</b>: {props.item.genre}</li>
+                    </ul>
+                }
+                </div>       
+            )
+    } 
+
+    const App = (props) => {
+        const [selectedItem, setSelectedItem] = React.useState([]);
+        const games = <%- games %>;
+
+        const itemClicked = (e) => {
+            console.log('item clicked');
+            console.log(e.target.innerText);
+
+            let found = games.find((item) => { return item.title == e.target.innerText });
+            console.log(found);
+            setSelectedItem(found);
+        }
+
+        return (
+            <div>
+                <h2>Games I Enjoy Playing</h2>
+                <Games data = {games} clickHandler={itemClicked}/>
+                <hr />
+                <Detail item={selectedItem} />
+            </div>
+        );
+    }
 
     ReactDOM.render(<App />, document.getElementById('root'));
 </script>
