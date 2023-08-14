@@ -26,31 +26,40 @@ const Games = (props) => {
 
     const Detail = (props) => {
         return (
-                <div>
-                <h3>Game Details</h3>
-                {props.item &&
-                    <ul> 
-                        <li><b>Title</b>: {props.item.title}</li>
-                        <li><b>Developer</b>: {props.item.developer}</li>
-                        <li><b>Release</b>: {props.item.release}</li>
-                        <li><b>Genre</b>: {props.item.genre}</li>
-                    </ul>
+            <div>
+            <h3>Game Details</h3>
+            {props.item &&
+                <form> 
+                    <b>Title</b>: <input type="text" name="title" onChange={props.changeHandler} value={props.item.title || ''} />
+                    <b>Developer</b>: <input type="text" name="developer" onChange={props.changeHandler} value={props.item.developer || ''} />
+                    <b>Release</b>: <input type="text" name="release" onChange={props.changeHandler} value={props.item.release || ''} />
+                    <b>Genre</b>: <input type="text" name="genre" onChange={props.changeHandler} value={props.item.genre || ''} />
+                </form>
                 }
-                </div>       
-            )
+            </div>       
+        )
     } 
 
     const App = (props) => {
+
         const [selectedItem, setSelectedItem] = React.useState([]);
+        const [items, setItems] = React.useState([games]);
         const games = <%- games %>;
 
         const itemClicked = (e) => {
-            console.log('item clicked');
-            console.log(e.target.innerText);
-
             let found = games.find((item) => { return item.title == e.target.innerText });
-            console.log(found);
             setSelectedItem(found);
+        }
+
+        const itemChanged = (e) => {
+            console.log(e.target);
+            let field = e.target.name;
+            let newItem = { ...selectedItem };
+            newItem[field] = e.target.value;
+
+            let newItems = items.filter(item => item.name != newItem.name)
+            console.log(newItems)
+            setSelectedItem(newItem); //ask about this code he was supposed to update and where to find it. :)
         }
 
         return (
@@ -58,7 +67,7 @@ const Games = (props) => {
                 <h2>Games I Enjoy Playing</h2>
                 <Games data = {games} clickHandler={itemClicked}/>
                 <hr />
-                <Detail item={selectedItem} />
+                <Detail item={selectedItem} changeHandler={itemChanged}/>
             </div>
         );
     }
