@@ -56,10 +56,7 @@ const Games = (props) => {
             let field = e.target.name;
             let newItem = { ...selectedItem };
             newItem[field] = e.target.value;
-
-            let newItems = items.filter(item => item.name != newItem.name)
-            console.log(newItems)
-            setSelectedItem(newItem); //ask about this code he was supposed to update and where to find it. :)
+            setSelectedItem(newItem);
         }
 
         return (
