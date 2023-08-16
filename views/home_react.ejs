@@ -28,20 +28,15 @@ const Games = (props) => {
         return (
             <div>
             <h3>Game Details</h3>
-            {props.item &&
                 <form> 
                     <b>Title</b>: <input type="text" name="title" onChange={props.changeHandler} value={props.item.title || ''} />
                     <b>Developer</b>: <input type="text" name="developer" onChange={props.changeHandler} value={props.item.developer || ''} />
                     <b>Release</b>: <input type="text" name="release" onChange={props.changeHandler} value={props.item.release || ''} />
                     <b>Genre</b>: <input type="text" name="genre" onChange={props.changeHandler} value={props.item.genre || ''} />
                 </form>
-                }
+                <button onClick={props.clearItems}>Clear</button>
             </div>       
         )
-    }
-    
-    const ClearGame = (props) => {
-        return <button onClick={props.clearItems}>Clear</button>;
     }
 
     const App = (props) => {
@@ -63,13 +58,16 @@ const Games = (props) => {
             setSelectedItem(newItem); //ask about update on how to update the list to reflect the changes we're making
         }
 
+        const clearItems = () => {
+        setSelectedItem({});
+        }
+
         return (
             <div>
                 <h2>Games I Enjoy Playing</h2>
                 <Games data = {games} clickHandler={itemClicked}/>
                 <hr />
-                <Detail item={selectedItem} changeHandler={itemChanged}/>
-                <ClearGame clearItems={() => setSelectedItem(null)} />
+                <Detail item={selectedItem} changeHandler={itemChanged} clearItems={clearItems} />
             </div>
         );
     }
